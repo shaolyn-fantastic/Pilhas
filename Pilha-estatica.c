@@ -10,8 +10,12 @@ typedef struct {
   int vetor[MAXTAM];
   int topo;
 }PilhaEstatica;
-
-
+void iniciaPilhaEstatica(PilhaEstatica *pilha);
+void EmpilhaPilhaEstatica(PilhaEstatica *pilha, int x);
+bool EstaVaziaPilhaEstatica(PilhaEstatica *pilha);
+bool EstaCheiaPilhaEstatica(PilhaEstatica *pilha);
+int TamanhoPilhaEstatica(PilhaEstatica* pilha);
+void ImprimiPilhaEstatica(PilhaEstatica* pilha);
 // E S T R U T U R A -- E S T Á T I C A
 //operações de modificação
 // 1- inicialização
@@ -19,8 +23,37 @@ void iniciaPilhaEstatica(PilhaEstatica *pilha){
   pilha->topo = 0;//primeira posição na inserção na pilha é a posição 0 do vetor
   }
 
- //2-inserção
- //3 -remoção
+ //2-inserção(empilhar/push)
+ void EmpilhaPilhaEstatica(PilhaEstatica *pilha, int x){
+   //vazia-> pode inserir
+   //cheia -> NÃO incrementa
+//se a pilha não estiver cheia
+  if(EstaCheiaPilhaEstatica(pilha) == false){
+   pilha->vetor[pilha->topo] = x;//atribui o x no vetor na posição do topo
+   //incrementar topo
+   pilha->topo++;
+//se estiver cheia
+}else{
+printf("fez cagada nao podera ser impresso\n");
+ }
+}
+//3 -remoção(desempliha/pop)
+int DesempilhaPilhaEstatica(PilhaEstatica* pilha){
+//cria um auxiliar para salvar o ultimo valor valido
+int aux;
+aux = pilha->vetor[pilha->topo-1];
+//se a pilha estiver vazia
+if(EstaVaziaPilhaEstatica(pilha) == false){
+  //decrementa o topo
+  pilha->topo--;
+  //se não (warning)
+}else{
+  printf("a pilha ja esta vazia\n");
+}
+//retorna o valor do topo
+return (aux);
+}
+
 // 4 - pesquisa (consulta)
 
 
@@ -30,17 +63,26 @@ bool EstaVaziaPilhaEstatica(PilhaEstatica *pilha){
 return (pilha->topo == 0);
 }
 
+//6 - está cheia
+bool EstaCheiaPilhaEstatica(PilhaEstatica *pilha){
+  return(pilha->topo == MAXTAM);
+}
 
- //6 - está cheia
- bool EstaCheiaPilhaEstatica(PilhaEstatica *pilha){
-   return(pilha->topo == MAXTAM);
- }
  //7 - quantidade de elementos da estrutura
 int TamanhoPilhaEstatica(PilhaEstatica* pilha){
   return (pilha->topo);
 }
 
  //8 - imprimir a estrutura
+void ImprimiPilhaEstatica(PilhaEstatica* pilha){
+  //pilha->vetor //pilha->topo
+  printf("Pilha = {");
+  for(int i=0;i<pilha->topo;i++){
+    printf("%d|",pilha->vetor[i]);
+  }
+  printf("}\n");
+}
+
 int main(){
   PilhaEstatica p;
   iniciaPilhaEstatica(&p);
@@ -48,10 +90,37 @@ int main(){
   if(EstaVaziaPilhaEstatica(&p)){
     printf("esta vazia\n");
   }else {
-    printf("nao esta vazia\n");
+    printf("tem alguma coisa ai dentro\n");
   }
   if(EstaCheiaPilhaEstatica(&p)){
     printf("esta cheia");
+  }else{
+    printf("nao esta cheia\n");
   }
   printf("tamanho da pilha %d \n",TamanhoPilhaEstatica(&p));
-return 0;}
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,42);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,43);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,44);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,45);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,46);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,47);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,48);
+  ImprimiPilhaEstatica(&p);
+  EmpilhaPilhaEstatica(&p,49);
+  ImprimiPilhaEstatica(&p);
+
+  int valor;
+  for(int i =0; i<8; i++){
+    valor= DesempilhaPilhaEstatica(&p);
+    ImprimiPilhaEstatica(&p);
+    printf("valor removido: %d\n",valor);
+  }
+return 0;
+}
