@@ -2,14 +2,15 @@
 #include<stdlib.h>
 #include<stdbool.h> // 1 - 0 > true or false
 
+#define MAXTAM 8
 /*definir os tipos
 vetor => {elementos}
 topo (indexador)*/
-#define MAXTAM 8
 typedef struct {
   int vetor[MAXTAM];
   int topo;
 }PilhaEstatica;
+
 void iniciaPilhaEstatica(PilhaEstatica *pilha);
 void EmpilhaPilhaEstatica(PilhaEstatica *pilha, int x);
 bool EstaVaziaPilhaEstatica(PilhaEstatica *pilha);
@@ -34,7 +35,7 @@ void iniciaPilhaEstatica(PilhaEstatica *pilha){
    pilha->topo++;
 //se estiver cheia
 }else{
-printf("fez cagada nao podera ser impresso\n");
+printf("fez cagada nao podera ser incrementado\n");
  }
 }
 //3 -remoção(desempliha/pop)
@@ -77,7 +78,7 @@ int TamanhoPilhaEstatica(PilhaEstatica* pilha){
 void ImprimiPilhaEstatica(PilhaEstatica* pilha){
   //pilha->vetor //pilha->topo
   printf("Pilha = {");
-  for(int i=0;i<pilha->topo;i++){
+  for(int i=0; i<pilha->topo; i++){
     printf("%d|",pilha->vetor[i]);
   }
   printf("}\n");
@@ -115,6 +116,7 @@ int main(){
   ImprimiPilhaEstatica(&p);
   EmpilhaPilhaEstatica(&p,49);
   ImprimiPilhaEstatica(&p);
+  printf("tamanho da pilha %d \n",TamanhoPilhaEstatica(&p));
 
   int valor;
   for(int i =0; i<8; i++){
